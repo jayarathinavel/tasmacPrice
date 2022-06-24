@@ -1,14 +1,12 @@
 function fetchAllLiquors() {
-    const allBeersTableBody = document.getElementById('allLiquorsTableBody');
-    allBeersTableBody.innerHTML = `
-    <td colspan="7">
+    const allLiquorsLoading = document.getElementById('allLiquorsLoading');
+    allLiquorsLoading.innerHTML = `
         <div class="d-flex justify-content-center">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span> 
             </div>
             <span class="ms-3"> Loading </span>
         </div>
-    </td>
     `;
     console.log("fetchAllLiquors() Starts");
     fetch("https://tasmac-price-api.herokuapp.com/getAllLiquor")
@@ -46,6 +44,8 @@ function fetchAllLiquors() {
                 ]
             });
         });
+        $("#allLiquorsLoading").css("display", "none");
+        $("#allLiquorsTable").css("display", "block");
     })
     .catch((error) => {
         console.log(`Error Fetching data : ${error}`)
@@ -54,16 +54,14 @@ function fetchAllLiquors() {
 }
 
 function fetchAllBeers() {
-    const allBeersTableBody = document.getElementById('allBeersTableBody');
-    allBeersTableBody.innerHTML = `
-    <td colspan="5">
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span> 
-            </div>
-            <span class="ms-3"> Loading </span>
+    const allBeersLoading = document.getElementById('allBeersLoading');
+    allBeersLoading.innerHTML = `
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span> 
         </div>
-    </td>
+        <span class="ms-3"> Loading </span>
+    </div>
     `;
     console.log("fetchAllBeers() Starts");
     fetch("https://tasmac-price-api.herokuapp.com/getAllBeer")
@@ -82,7 +80,6 @@ function fetchAllBeers() {
           </tr>
         `
         })
-        document.getElementById('allBeersTableBody').innerHTML = output
         $(document).ready(function () {
             $('#allBeersTable').DataTable({
                 paging: true,
@@ -99,6 +96,9 @@ function fetchAllBeers() {
                 ]
             });
         });
+        $("#allBeersLoading").css("display", "none");
+        $("#allBeersTable").css("display", "block");
+
     })
     .catch((error) => {
         console.log(`Error Fetching data : ${error}`)
