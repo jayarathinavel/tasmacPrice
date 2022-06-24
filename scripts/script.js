@@ -80,6 +80,7 @@ function fetchAllBeers() {
           </tr>
         `
         })
+        document.getElementById('allBeersTableBody').innerHTML = output
         $(document).ready(function () {
             $('#allBeersTable').DataTable({
                 paging: true,
